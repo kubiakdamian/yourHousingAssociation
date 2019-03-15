@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/**/*.js",
 
             //API
-//            "/registration/**"
+            "/registration/**"
     };
 
     private final CustomUserDetailsService customUserDetailsService;

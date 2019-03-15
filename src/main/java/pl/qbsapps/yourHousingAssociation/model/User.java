@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,6 +49,11 @@ public class User implements UserDetails {
     @NotBlank
     @Size(min = 2, max = 255)
     private String lastName;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @JsonIgnore
+    private AccountStatus status;
 
     @Override
     @JsonIgnore
