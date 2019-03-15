@@ -3,7 +3,6 @@ package pl.qbsapps.yourHousingAssociation.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +27,5 @@ public class RegistrationController {
         registrationService.registerUser(registrationRequest);
 
         return new ResponseEntity(HttpStatus.CREATED);
-    }
-
-    @GetMapping
-    public String test() {
-        return "test";
     }
 }
