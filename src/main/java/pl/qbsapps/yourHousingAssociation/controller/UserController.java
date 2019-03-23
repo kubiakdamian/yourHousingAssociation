@@ -37,6 +37,6 @@ public class UserController {
         User user = userRepository.findByEmail(authenticationRequest.getLogin())
                 .orElseThrow(UserNotFoundException::new);
 
-        return ResponseEntity.ok(new AuthenticationResponse(token));
+        return ResponseEntity.ok(new AuthenticationResponse(token, user.getRole()));
     }
 }

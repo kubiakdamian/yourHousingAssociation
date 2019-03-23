@@ -55,6 +55,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private AccountStatus status;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
