@@ -17,13 +17,13 @@ public class ExceptionHandlerController {
     @ExceptionHandler(AbstractBadRequestException.class)
     public @ResponseBody
     ExceptionApiInfo handleBadRequestException(AppException ex) {
-        return new ExceptionApiInfo(ex.getMessage());
+        return new ExceptionApiInfo(ex.getMessage(), ex.getCode().getCode());
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(AbstractNotFoundException.class)
     public @ResponseBody
     ExceptionApiInfo handleNotFoundException(AppException ex) {
-        return new ExceptionApiInfo(ex.getMessage());
+        return new ExceptionApiInfo(ex.getMessage(), ex.getCode().getCode());
     }
 }

@@ -1,15 +1,20 @@
 package pl.qbsapps.yourHousingAssociation.exception;
 
 import lombok.Getter;
+import pl.qbsapps.yourHousingAssociation.model.exception.ExceptionCode;
 
 @Getter
 public class AppException extends RuntimeException {
 
-    public AppException(String message) {
+    private final ExceptionCode code;
+
+    public AppException(String message, ExceptionCode code) {
         super(message);
+        this.code = code;
     }
 
-    public AppException(String message, Throwable cause) {
+    public AppException(String message, Throwable cause, ExceptionCode code) {
         super(message, cause);
+        this.code = code;
     }
 }
