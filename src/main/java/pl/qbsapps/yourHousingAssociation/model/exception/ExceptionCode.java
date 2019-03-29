@@ -9,7 +9,8 @@ import lombok.Getter;
 public enum ExceptionCode {
     USER_NOT_FOUND("UNF"),
     USER_NOT_ACTIVATED("UNA"),
-    USER_ALREADY_EXISTS("UAE");
+    USER_ALREADY_EXISTS("UAE"),
+    FEE_ALREADY_ADDED("FAA");
 
     private String code;
 }
