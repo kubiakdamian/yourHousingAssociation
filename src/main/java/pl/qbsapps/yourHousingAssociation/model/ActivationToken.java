@@ -38,7 +38,7 @@ public class ActivationToken {
         return new Date(calendar.getTime().getTime());
     }
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 }
