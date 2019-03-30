@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,9 +14,11 @@ import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.model.request.AuthenticationRequest;
 import pl.qbsapps.yourHousingAssociation.model.response.AuthenticationResponse;
+import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.AddressService;
 import pl.qbsapps.yourHousingAssociation.service.AuthService;
+import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -27,12 +30,14 @@ public class UserController {
     private final AuthService authService;
     private final UserRepository userRepository;
     private final AddressService addressService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(AuthService authService, UserRepository userRepository, AddressService addressService) {
+    public UserController(AuthService authService, UserRepository userRepository, AddressService addressService, UserService userService) {
         this.authService = authService;
         this.userRepository = userRepository;
         this.addressService = addressService;
+        this.userService = userService;
     }
 
     @PostMapping(value = "/login")
@@ -46,11 +51,19 @@ public class UserController {
         return ResponseEntity.ok(new AuthenticationResponse(token, user.getRole(), user.isVerified()));
     }
 
-    @PostMapping(value = "/address/{blockNumber}/{street}/{apartmentNumber}/{postalCode}")
-    public ResponseEntity addAddress(Principal user, @PathVariable int blockNumber, @PathVariable String street,
+    @PostMapping(value = "/address/{city}/{blockNumber}/{street}/{streetNumber}/{apartmentNumber}/{postalCode}")
+    public ResponseEntity addAddress(Principal user, @PathVariable String city, @PathVariable int blockNumber,
+                                     @PathVariable String street, @PathVariable int streetNumber,
                                      @PathVariable int apartmentNumber, @PathVariable String postalCode) {
-        addressService.addUserAddress(user.getName(), blockNumber, street, apartmentNumber, postalCode);
+        addressService.addUserAddress(user.getName(), city, blockNumber, street, streetNumber, apartmentNumber, postalCode);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/personalData")
+    public ResponseEntity<?> getPersonalData(Principal user){
+        UserDataResponse userDataResponse = userService.getUserData(user.getName());
+
+        return ResponseEntity.ok(userDataResponse);
     }
 }

@@ -21,10 +21,16 @@ public class Address {
     private Long id;
 
     @Column
+    private String city;
+
+    @Column
     private int blockNumber;
 
     @Column
     private String street;
+
+    @Column
+    private int streetNumber;
 
     @Column
     private int apartmentNumber;
@@ -37,9 +43,11 @@ public class Address {
     @MapsId
     private User user;
 
-    public Address(int blockNumber, String street, int apartmentNumber, String postalCode, User user) {
+    public Address(String city, int blockNumber, String street, int streetNumber, int apartmentNumber, String postalCode, User user) {
+        this.city = city;
         this.blockNumber = blockNumber;
         this.street = street;
+        this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
         this.postalCode = postalCode;
         this.user = user;
