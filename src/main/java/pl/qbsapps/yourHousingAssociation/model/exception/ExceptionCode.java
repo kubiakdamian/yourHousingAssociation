@@ -10,7 +10,8 @@ public enum ExceptionCode {
     USER_NOT_FOUND("UNF"),
     USER_NOT_ACTIVATED("UNA"),
     USER_ALREADY_EXISTS("UAE"),
-    FEE_ALREADY_ADDED("FAA");
+    FEE_ALREADY_ADDED("FAA"),
+    ADDRESS_ALREADY_ADDED("AAA");
 
     private String code;
 }

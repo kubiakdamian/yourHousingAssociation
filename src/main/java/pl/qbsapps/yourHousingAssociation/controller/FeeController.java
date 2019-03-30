@@ -24,8 +24,8 @@ public class FeeController {
 
     @PostMapping("/{gas}/{coldWater}/{hotWater}/{sewage}/{heating}/{repairFund}")
     public ResponseEntity addFee(Principal user, @PathVariable float gas, @PathVariable float coldWater,
-                                    @PathVariable float hotWater, @PathVariable float sewage, @PathVariable float heating,
-                                    @PathVariable int repairFund){
+                                 @PathVariable float hotWater, @PathVariable float sewage, @PathVariable float heating,
+                                 @PathVariable int repairFund) {
         feeService.addFees(user.getName(), gas, coldWater, hotWater, sewage, heating, repairFund);
 
         return new ResponseEntity(HttpStatus.OK);
