@@ -7,9 +7,11 @@ import pl.qbsapps.yourHousingAssociation.model.Role;
 public class AuthenticationResponse {
     private String token;
     private Role role;
+    private boolean isVerified;
 
-    public AuthenticationResponse(String token, Role role) {
+    public AuthenticationResponse(String token, Role role, boolean isVerified) {
         this.token = token;
         this.role = role;
+        this.isVerified = isVerified;
     }
 }

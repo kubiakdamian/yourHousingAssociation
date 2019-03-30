@@ -8,7 +8,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5096df4d-feba-495a-bc62-c7a8524c70da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/exception/ExceptionCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/exception/ExceptionCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/AuthenticationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,64 +24,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Fee.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/Fee.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeeServiceImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="61" column="95" selection-start-line="61" selection-start-column="95" selection-end-line="61" selection-end-column="95" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeeRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/repository/FeeRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeeController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#416#417#0" expanded="true" />
-                <element signature="e#460#461#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegistrationService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -134,16 +82,11 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/RootConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/Role.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/AuthenticationResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/MailSenderService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/HibernateConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/ApplicationInitializer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/MailSenderConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/UserActivationMail.html" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/MailSenderServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/WebConfig.java" />
@@ -163,9 +106,14 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/exception/ExceptionCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/exception/FeeAlreadyAdded.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/Fee.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/repository/FeeRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/AuthenticationResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -216,8 +164,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,69 +202,15 @@
               <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -485,7 +377,8 @@
       <workItem from="1553780968028" duration="1786000" />
       <workItem from="1553872230169" duration="2520000" />
       <workItem from="1553877285001" duration="2380000" />
-      <workItem from="1553884766031" duration="3791000" />
+      <workItem from="1553884766031" duration="4666000" />
+      <workItem from="1553940340440" duration="2402000" />
     </task>
     <task id="LOCAL-00001" summary="Handler for default errors added">
       <created>1552670110596</created>
@@ -564,15 +457,21 @@
       <option name="project" value="LOCAL" />
       <updated>1553876181522</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Adding monthly fee added">
+      <created>1553889990178</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1553889990178</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60250000" />
+    <option name="totallyTimeSpent" value="63527000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -587,7 +486,7 @@
       <window_info anchor="right" id="JSF" order="3" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39651415" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39651415" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.32570806" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
@@ -598,7 +497,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32897604" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32897604" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15511727" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15671642" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -629,7 +528,8 @@
     <MESSAGE value="Cors mappings added" />
     <MESSAGE value="Changed maven dependency to solve problem with database updating" />
     <MESSAGE value="Exceptions codes added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exceptions codes added" />
+    <MESSAGE value="Adding monthly fee added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding monthly fee added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -730,13 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/AuthenticationResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/MailSenderService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -784,13 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="524">
           <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -942,13 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="39" column="81" selection-start-line="39" selection-start-column="81" selection-end-line="39" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/exception/FeeAlreadyAddedException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -968,35 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
-            <element signature="e#460#461#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1007,20 +857,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/Fee.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="663">
           <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="61" column="99" selection-start-line="61" selection-start-column="99" selection-end-line="61" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="62" column="31" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/AuthenticationResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="79" column="18" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="39" column="103" lean-forward="true" selection-start-line="39" selection-start-column="103" selection-end-line="39" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1034,10 +926,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="61" column="95" selection-start-line="61" selection-start-column="95" selection-end-line="61" selection-end-column="95" />
+        <state relative-caret-position="353">
+          <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

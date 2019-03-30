@@ -49,6 +49,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .lastName(registrationRequest.getLastName())
                 .status(AccountStatus.INACTIVE)
                 .role(Role.TENANT)
+                .isVerified(false)
                 .build();
 
         userRepository.save(user);
@@ -73,6 +74,14 @@ public class RegistrationServiceImpl implements RegistrationService {
         user.setStatus(AccountStatus.ACTIVE);
 
         activationTokenRepository.deleteActivationTokenByToken(token);
+    }
+
+    @Override
+    @Transactional
+    public void verifyUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+
+        user.setVerified(true);
     }
 
     private String generateTokenForUser(User user) {
