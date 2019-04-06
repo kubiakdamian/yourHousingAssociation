@@ -26,8 +26,10 @@ public class UserServiceImpl implements UserService {
 
         userDataResponse.setFirstName(user.getFirstName());
         userDataResponse.setLastName(user.getLastName());
+        userDataResponse.setCity(user.getAddress().getCity());
         userDataResponse.setBlockNumber(user.getAddress().getBlockNumber());
         userDataResponse.setStreet(user.getAddress().getStreet());
+        userDataResponse.setStreetNumber(user.getAddress().getStreetNumber());
         userDataResponse.setApartmentNumber(user.getAddress().getApartmentNumber());
         userDataResponse.setPostalCode(user.getAddress().getPostalCode());
 

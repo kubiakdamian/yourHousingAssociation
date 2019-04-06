@@ -9,7 +9,11 @@ public class UserDataResponse {
 
     private String lastName;
 
+    private String city;
+
     private String street;
+
+    private int streetNumber;
 
     private String postalCode;
 

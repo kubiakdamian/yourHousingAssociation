@@ -67,6 +67,10 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Address address;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    private VerificationKey verificationKey;
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {

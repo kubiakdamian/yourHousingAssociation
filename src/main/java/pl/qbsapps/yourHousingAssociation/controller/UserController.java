@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/personalData")
-    public ResponseEntity<?> getPersonalData(Principal user){
+    public ResponseEntity<?> getPersonalData(Principal user) {
         UserDataResponse userDataResponse = userService.getUserData(user.getName());
 
         return ResponseEntity.ok(userDataResponse);

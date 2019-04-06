@@ -10,17 +10,20 @@ import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.repository.AddressRepository;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.AddressService;
+import pl.qbsapps.yourHousingAssociation.service.VerificationKeyService;
 
 @Service
 public class AddressServiceImpl implements AddressService {
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
+    private final VerificationKeyService verificationKeyService;
 
     @Autowired
-    public AddressServiceImpl(UserRepository userRepository, AddressRepository addressRepository) {
+    public AddressServiceImpl(UserRepository userRepository, AddressRepository addressRepository, VerificationKeyService verificationKeyService) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
+        this.verificationKeyService = verificationKeyService;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class AddressServiceImpl implements AddressService {
 
         Address address = new Address(city, blockNumber, street, streetNumber, apartmentNumber, postalCode, user);
 
+        verificationKeyService.generateKey(user);
         addressRepository.save(address);
     }
 
