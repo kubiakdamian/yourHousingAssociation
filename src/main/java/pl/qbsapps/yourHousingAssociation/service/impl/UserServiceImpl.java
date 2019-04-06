@@ -65,11 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ArrayList<User> getAllManagers(String username) {
-        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
-
-        if (!user.getRole().equals(Role.ADMIN)) {
-            throw new PermissionDeniedException();
-        }
+        checkIfUserHasRequiredPermissions(username, Role.ADMIN);
 
         ArrayList<User> managers = (ArrayList<User>) userRepository.findAllByRole(Role.MANAGER);
 
@@ -78,5 +74,24 @@ public class UserServiceImpl implements UserService {
         }
 
         return managers;
+    }
+
+    @Override
+    @Transactional
+    public void deleteManager(String adminName, Long userId) {
+        checkIfUserHasRequiredPermissions(adminName, Role.ADMIN);
+
+        User manager = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        checkIfUserHasRequiredPermissions(manager.getUsername(), Role.MANAGER);
+
+        userRepository.delete(manager);
+    }
+
+    private void checkIfUserHasRequiredPermissions(String username, Role role) {
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+        if (!user.getRole().equals(role)) {
+            throw new PermissionDeniedException();
+        }
     }
 }

@@ -11,4 +11,6 @@ public interface UserService {
     void verifyUser(String verificationKey, String username);
 
     ArrayList<User> getAllManagers(String username);
+
+    void deleteManager(String adminName, Long userId);
 }
