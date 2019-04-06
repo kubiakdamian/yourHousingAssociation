@@ -6,6 +6,4 @@ public interface RegistrationService {
     void registerUser(RegistrationRequest registrationRequest);
 
     void activateUser(String token);
-
-    void verifyUser(Long userId);
 }

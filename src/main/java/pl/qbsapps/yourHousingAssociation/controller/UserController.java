@@ -21,6 +21,7 @@ import pl.qbsapps.yourHousingAssociation.service.AuthService;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 import javax.validation.Valid;
+import javax.ws.rs.Path;
 import java.security.Principal;
 
 @RestController
@@ -65,5 +66,12 @@ public class UserController {
         UserDataResponse userDataResponse = userService.getUserData(user.getName());
 
         return ResponseEntity.ok(userDataResponse);
+    }
+
+    @PostMapping(value = "/verify/{verificationKey}")
+    public ResponseEntity verify(Principal user, @PathVariable String verificationKey) {
+        userService.verifyUser(verificationKey, user.getName());
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

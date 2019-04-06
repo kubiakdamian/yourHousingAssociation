@@ -11,7 +11,9 @@ public enum ExceptionCode {
     USER_NOT_ACTIVATED("UNA"),
     USER_ALREADY_EXISTS("UAE"),
     FEE_ALREADY_ADDED("FAA"),
-    ADDRESS_ALREADY_ADDED("AAA");
+    ADDRESS_ALREADY_ADDED("AAA"),
+    VERIFICATION_KEY_NOT_FOUND("KNF"),
+    WRONG_VERIFICATION_KEY("WVK");
 
     private String code;
 }

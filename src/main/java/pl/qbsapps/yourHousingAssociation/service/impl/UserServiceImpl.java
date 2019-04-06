@@ -2,20 +2,27 @@ package pl.qbsapps.yourHousingAssociation.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
+import pl.qbsapps.yourHousingAssociation.exception.VerificationKeyNotFoundException;
+import pl.qbsapps.yourHousingAssociation.exception.WrongVerificationKeyException;
 import pl.qbsapps.yourHousingAssociation.model.User;
+import pl.qbsapps.yourHousingAssociation.model.VerificationKey;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
+import pl.qbsapps.yourHousingAssociation.repository.VerificationKeyRepository;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final VerificationKeyRepository verificationKeyRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, VerificationKeyRepository verificationKeyRepository) {
         this.userRepository = userRepository;
+        this.verificationKeyRepository = verificationKeyRepository;
     }
 
     @Override
@@ -32,7 +39,22 @@ public class UserServiceImpl implements UserService {
         userDataResponse.setStreetNumber(user.getAddress().getStreetNumber());
         userDataResponse.setApartmentNumber(user.getAddress().getApartmentNumber());
         userDataResponse.setPostalCode(user.getAddress().getPostalCode());
+        userDataResponse.setVerified(user.isVerified());
 
         return userDataResponse;
+    }
+
+    @Override
+    @Transactional
+    public void verifyUser(String verificationKey, String username) {
+       User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+       VerificationKey key = verificationKeyRepository.findById(user.getId()).orElseThrow(VerificationKeyNotFoundException::new);
+
+       if(!verificationKey.equals(key.getKey())){
+            throw new WrongVerificationKeyException();
+       }
+
+       user.setVerified(true);
     }
 }

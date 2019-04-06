@@ -76,14 +76,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         activationTokenRepository.deleteActivationTokenByToken(token);
     }
 
-    @Override
-    @Transactional
-    public void verifyUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
-
-        user.setVerified(true);
-    }
-
     private String generateTokenForUser(User user) {
         final ActivationToken activationToken = new ActivationToken();
         String token = activationTokenService.generateActivationToken(user);

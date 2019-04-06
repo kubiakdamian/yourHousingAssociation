@@ -20,4 +20,6 @@ public class UserDataResponse {
     private int blockNumber;
 
     private int apartmentNumber;
+
+    private boolean isVerified;
 }
