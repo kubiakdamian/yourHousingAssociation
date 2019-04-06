@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.qbsapps.yourHousingAssociation.exception.PermissionDeniedException;
 import pl.qbsapps.yourHousingAssociation.exception.UserAlreadyExistsException;
 import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.model.AccountStatus;
@@ -74,6 +75,32 @@ public class RegistrationServiceImpl implements RegistrationService {
         user.setStatus(AccountStatus.ACTIVE);
 
         activationTokenRepository.deleteActivationTokenByToken(token);
+    }
+
+    @Override
+    @Transactional
+    public void createManager(RegistrationRequest registrationRequest, String username) {
+        User admin = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+        if(!admin.getRole().equals(Role.ADMIN)){
+            throw new PermissionDeniedException();
+        }
+
+        if(userRepository.findByEmail(registrationRequest.getEmail()).isPresent()){
+            throw new UserAlreadyExistsException();
+        }
+
+        final User user = User.builder()
+                .email(registrationRequest.getEmail())
+                .password(passwordEncoder.encode(registrationRequest.getPassword()))
+                .firstName(registrationRequest.getFirstName())
+                .lastName(registrationRequest.getLastName())
+                .status(AccountStatus.ACTIVE)
+                .role(Role.MANAGER)
+                .isVerified(true)
+                .build();
+
+        userRepository.save(user);
     }
 
     private String generateTokenForUser(User user) {

@@ -21,8 +21,8 @@ import pl.qbsapps.yourHousingAssociation.service.AuthService;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 import javax.validation.Valid;
-import javax.ws.rs.Path;
 import java.security.Principal;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -73,5 +73,12 @@ public class UserController {
         userService.verifyUser(verificationKey, user.getName());
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/managers")
+    public ResponseEntity<?> getManagers(Principal user) {
+        ArrayList<User> managers = userService.getAllManagers(user.getName());
+
+        return ResponseEntity.ok(managers);
     }
 }

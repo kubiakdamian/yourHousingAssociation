@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.qbsapps.yourHousingAssociation.exception.AbstractBadRequestException;
 import pl.qbsapps.yourHousingAssociation.exception.AbstractNotFoundException;
+import pl.qbsapps.yourHousingAssociation.exception.AbstractUnauthorizedException;
 import pl.qbsapps.yourHousingAssociation.exception.AppException;
 import pl.qbsapps.yourHousingAssociation.model.exception.ExceptionApiInfo;
 
@@ -24,6 +25,13 @@ public class ExceptionHandlerController {
     @ExceptionHandler(AbstractNotFoundException.class)
     public @ResponseBody
     ExceptionApiInfo handleNotFoundException(AppException ex) {
+        return new ExceptionApiInfo(ex.getMessage(), ex.getCode().getCode());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(AbstractUnauthorizedException.class)
+    public @ResponseBody
+    ExceptionApiInfo handleUnauthorizedException(AppException ex) {
         return new ExceptionApiInfo(ex.getMessage(), ex.getCode().getCode());
     }
 }

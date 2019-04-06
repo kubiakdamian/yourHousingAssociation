@@ -15,6 +15,7 @@ import pl.qbsapps.yourHousingAssociation.model.request.RegistrationRequest;
 import pl.qbsapps.yourHousingAssociation.service.RegistrationService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping(value = "/registration")
@@ -43,5 +44,14 @@ public class RegistrationController {
         registrationService.activateUser(token);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/manager")
+    public ResponseEntity createManager(@RequestBody @Valid RegistrationRequest registrationRequest, Principal user) {
+        logger.debug("Creating new manager - " + registrationRequest.getEmail());
+
+        registrationService.createManager(registrationRequest, user.getName());
+
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

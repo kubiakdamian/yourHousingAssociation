@@ -3,15 +3,20 @@ package pl.qbsapps.yourHousingAssociation.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.qbsapps.yourHousingAssociation.exception.ManagersNotFoundException;
+import pl.qbsapps.yourHousingAssociation.exception.PermissionDeniedException;
 import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.exception.VerificationKeyNotFoundException;
 import pl.qbsapps.yourHousingAssociation.exception.WrongVerificationKeyException;
+import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.model.VerificationKey;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.repository.VerificationKeyRepository;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
+
+import java.util.ArrayList;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -47,14 +52,31 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void verifyUser(String verificationKey, String username) {
-       User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
-       VerificationKey key = verificationKeyRepository.findById(user.getId()).orElseThrow(VerificationKeyNotFoundException::new);
+        VerificationKey key = verificationKeyRepository.findById(user.getId()).orElseThrow(VerificationKeyNotFoundException::new);
 
-       if(!verificationKey.equals(key.getKey())){
+        if (!verificationKey.equals(key.getKey())) {
             throw new WrongVerificationKeyException();
-       }
+        }
 
-       user.setVerified(true);
+        user.setVerified(true);
+    }
+
+    @Override
+    public ArrayList<User> getAllManagers(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+        if (!user.getRole().equals(Role.ADMIN)) {
+            throw new PermissionDeniedException();
+        }
+
+        ArrayList<User> managers = (ArrayList<User>) userRepository.findAllByRole(Role.MANAGER);
+
+        if (managers.isEmpty()) {
+            throw new ManagersNotFoundException();
+        }
+
+        return managers;
     }
 }

@@ -6,4 +6,6 @@ public interface RegistrationService {
     void registerUser(RegistrationRequest registrationRequest);
 
     void activateUser(String token);
+
+    void createManager(RegistrationRequest registrationRequest, String username);
 }
