@@ -13,6 +13,9 @@ import pl.qbsapps.yourHousingAssociation.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @Service
@@ -65,6 +68,19 @@ public class ArticleServiceImpl implements ArticleService {
         }
 
         articleRepository.save(article);
+    }
+
+    @Override
+    public Collection<Article> getThreeNewestArticles() {
+        ArrayList<Article> allArticles = (ArrayList<Article>) articleRepository.findAll();
+        ArrayList<Article> newestArticles = new ArrayList<>();
+
+        Collections.reverse(allArticles);
+        for(int i = 0; i < 3; i++){
+            newestArticles.add(allArticles.get(i));
+        }
+
+        return newestArticles;
     }
 
     private String generateFileName() {
