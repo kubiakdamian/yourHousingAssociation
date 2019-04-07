@@ -1,5 +1,6 @@
 package pl.qbsapps.yourHousingAssociation.service;
 
+import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 
@@ -13,4 +14,6 @@ public interface UserService {
     ArrayList<User> getAllManagers(String username);
 
     void deleteManager(String adminName, Long userId);
+
+    void checkIfUserHasRequiredPermissions(String username, Role role);
 }

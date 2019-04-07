@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(manager);
     }
 
-    private void checkIfUserHasRequiredPermissions(String username, Role role) {
+    public void checkIfUserHasRequiredPermissions(String username, Role role) {
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
         if (!user.getRole().equals(role)) {
