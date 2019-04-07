@@ -2,6 +2,7 @@ package pl.qbsapps.yourHousingAssociation.service;
 
 import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
+import pl.qbsapps.yourHousingAssociation.model.response.TenantResponse;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 
 import java.util.ArrayList;
@@ -16,4 +17,6 @@ public interface UserService {
     void deleteManager(String adminName, Long userId);
 
     void checkIfUserHasRequiredPermissions(String username, Role role);
+
+    TenantResponse getTenantByUsername(String managerName, String tenantEmail);
 }

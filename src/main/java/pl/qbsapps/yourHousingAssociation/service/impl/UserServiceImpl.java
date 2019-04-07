@@ -11,12 +11,14 @@ import pl.qbsapps.yourHousingAssociation.exception.WrongVerificationKeyException
 import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.model.VerificationKey;
+import pl.qbsapps.yourHousingAssociation.model.response.TenantResponse;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.repository.VerificationKeyRepository;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -85,6 +87,18 @@ public class UserServiceImpl implements UserService {
         checkIfUserHasRequiredPermissions(manager.getUsername(), Role.MANAGER);
 
         userRepository.delete(manager);
+    }
+
+    @Override
+    public TenantResponse getTenantByUsername(String managerName, String tenantEmail) {
+        checkIfUserHasRequiredPermissions(managerName, Role.MANAGER);
+
+        User tenant = userRepository.findByEmail(tenantEmail).orElseThrow(UserNotFoundException::new);
+        if(!tenant.getRole().equals(Role.TENANT)){
+            throw new UserNotFoundException();
+        }
+
+        return new TenantResponse(tenant.getEmail(), tenant.getFirstName(), tenant.getLastName(), tenant.getVerificationKey().getKey());
     }
 
     public void checkIfUserHasRequiredPermissions(String username, Role role) {

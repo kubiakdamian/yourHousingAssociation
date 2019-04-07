@@ -15,6 +15,7 @@ import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.model.request.AuthenticationRequest;
 import pl.qbsapps.yourHousingAssociation.model.response.AuthenticationResponse;
+import pl.qbsapps.yourHousingAssociation.model.response.TenantResponse;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.AddressService;
@@ -88,5 +89,12 @@ public class UserController {
         userService.deleteManager(user.getName(), managerId);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/tenant/{tenantEmail:.+}")
+    public ResponseEntity<?> getTenant(Principal user, @PathVariable String tenantEmail) {
+        TenantResponse tenant = userService.getTenantByUsername(user.getName(), tenantEmail);
+
+        return ResponseEntity.ok(tenant);
     }
 }
