@@ -54,6 +54,13 @@ public class FeeServiceImpl implements FeeService {
         feeRepository.save(fee);
     }
 
+    @Override
+    public boolean isFeeFulfilled(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+        return checkIfFeeIsAlreadyAdded(user.getId());
+    }
+
     private boolean checkIfFeeIsAlreadyAdded(Long userId){
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();

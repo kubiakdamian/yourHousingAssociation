@@ -7,5 +7,5 @@ public interface RegistrationService {
 
     void activateUser(String token);
 
-    void createManager(RegistrationRequest registrationRequest, String username);
+    void createManager(RegistrationRequest registrationRequest, String username, int lowBlock, int highBlock);
 }

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -70,6 +71,10 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private VerificationKey verificationKey;
+
+    @ElementCollection
+    @JsonIgnore
+    private Collection<Integer> blocksNumbers;
 
     @Override
     @JsonIgnore

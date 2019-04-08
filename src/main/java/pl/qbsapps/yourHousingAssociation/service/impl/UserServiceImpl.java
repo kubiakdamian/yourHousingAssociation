@@ -18,7 +18,6 @@ import pl.qbsapps.yourHousingAssociation.repository.VerificationKeyRepository;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -94,7 +93,7 @@ public class UserServiceImpl implements UserService {
         checkIfUserHasRequiredPermissions(managerName, Role.MANAGER);
 
         User tenant = userRepository.findByEmail(tenantEmail).orElseThrow(UserNotFoundException::new);
-        if(!tenant.getRole().equals(Role.TENANT)){
+        if (!tenant.getRole().equals(Role.TENANT)) {
             throw new UserNotFoundException();
         }
 

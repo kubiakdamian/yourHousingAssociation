@@ -23,4 +23,8 @@ public class RegistrationRequest {
     @Size(min = 2, max = 255)
     @NotNull
     private String lastName;
+
+    private int lowBlock;
+
+    private int highBlock;
 }

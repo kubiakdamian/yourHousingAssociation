@@ -45,6 +45,9 @@ public class Fee {
     @Column(nullable = false)
     private boolean isPaid;
 
+    @Column(nullable = false)
+    private boolean isVerified;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

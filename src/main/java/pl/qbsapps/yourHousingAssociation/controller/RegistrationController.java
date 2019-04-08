@@ -50,7 +50,7 @@ public class RegistrationController {
     public ResponseEntity createManager(@RequestBody @Valid RegistrationRequest registrationRequest, Principal user) {
         logger.debug("Creating new manager - " + registrationRequest.getEmail());
 
-        registrationService.createManager(registrationRequest, user.getName());
+        registrationService.createManager(registrationRequest, user.getName(), registrationRequest.getLowBlock(), registrationRequest.getHighBlock());
 
         return new ResponseEntity(HttpStatus.CREATED);
     }

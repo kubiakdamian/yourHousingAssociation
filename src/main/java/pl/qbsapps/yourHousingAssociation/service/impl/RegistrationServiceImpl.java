@@ -18,6 +18,8 @@ import pl.qbsapps.yourHousingAssociation.service.ActivationTokenService;
 import pl.qbsapps.yourHousingAssociation.service.MailSenderService;
 import pl.qbsapps.yourHousingAssociation.service.RegistrationService;
 
+import java.util.ArrayList;
+
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
 
@@ -79,7 +81,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     @Transactional
-    public void createManager(RegistrationRequest registrationRequest, String username) {
+    public void createManager(RegistrationRequest registrationRequest, String username, int lowBlock, int highBlock) {
         User admin = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
         if(!admin.getRole().equals(Role.ADMIN)){
@@ -90,6 +92,11 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new UserAlreadyExistsException();
         }
 
+        ArrayList<Integer> blocks = new ArrayList<>();
+        for(int i = lowBlock; i <= highBlock; i++){
+            blocks.add(i);
+        }
+
         final User user = User.builder()
                 .email(registrationRequest.getEmail())
                 .password(passwordEncoder.encode(registrationRequest.getPassword()))
@@ -98,6 +105,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                 .status(AccountStatus.ACTIVE)
                 .role(Role.MANAGER)
                 .isVerified(true)
+                .blocksNumbers(blocks)
                 .build();
 
         userRepository.save(user);
