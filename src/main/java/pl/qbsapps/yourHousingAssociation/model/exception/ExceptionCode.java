@@ -15,7 +15,8 @@ public enum ExceptionCode {
     VERIFICATION_KEY_NOT_FOUND("KNF"),
     WRONG_VERIFICATION_KEY("WVK"),
     MANAGERS_NOT_FOUND("MNF"),
-    NO_REQUIRED_PERMISSIONS("NRP");
+    NO_REQUIRED_PERMISSIONS("NRP"),
+    FEE_NOT_FOUND("FNF");
 
     private String code;
 }
