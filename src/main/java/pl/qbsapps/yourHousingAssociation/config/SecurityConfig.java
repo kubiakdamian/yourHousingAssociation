@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //API
             "/registration/**",
             "/user/login",
-            "/article/newest"
+            "/article/newest/**"
     };
 
     private final CustomUserDetailsService customUserDetailsService;

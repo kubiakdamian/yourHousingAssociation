@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pl.qbsapps.yourHousingAssociation.model.Article;
 import pl.qbsapps.yourHousingAssociation.model.Role;
+import pl.qbsapps.yourHousingAssociation.model.response.NewestArticlesResponse;
 import pl.qbsapps.yourHousingAssociation.repository.ArticleRepository;
 import pl.qbsapps.yourHousingAssociation.service.ArticleService;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
@@ -71,14 +72,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Collection<Article> getThreeNewestArticles() {
+    public Collection<NewestArticlesResponse> getThreeNewestArticles(String language) {
         ArrayList<Article> allArticles = (ArrayList<Article>) articleRepository.findAll();
-        ArrayList<Article> newestArticles = new ArrayList<>();
+        ArrayList<NewestArticlesResponse> newestArticles;
 
         Collections.reverse(allArticles);
-        for(int i = 0; i < 3; i++){
-            newestArticles.add(allArticles.get(i));
+
+        int articlesToGet;
+
+        if (allArticles.size() < 3) {
+            articlesToGet = allArticles.size();
+        } else {
+            articlesToGet = 3;
         }
+
+        newestArticles = getProperArticleData(language, articlesToGet, allArticles);
+
 
         return newestArticles;
     }
@@ -90,5 +99,53 @@ public class ArticleServiceImpl implements ArticleService {
 
     private String getFileType(String fileName) {
         return (fileName.substring(fileName.lastIndexOf(".")).trim());
+    }
+
+    private ArrayList<NewestArticlesResponse> getProperArticleData(String language, int articlesToGet, ArrayList<Article> allArticles) {
+        ArrayList<NewestArticlesResponse> newestArticles = new ArrayList<>();
+
+        switch (language) {
+            case "pl":
+                for (int i = 0; i < articlesToGet; i++) {
+                    NewestArticlesResponse newestArticlesResponse = new NewestArticlesResponse();
+                    newestArticlesResponse.setTitle(allArticles.get(i).getPlTitle());
+                    newestArticlesResponse.setText(allArticles.get(i).getPlText());
+
+                    newestArticles.add(newestArticlesResponse);
+                }
+
+                break;
+
+            case "en":
+                addEnglishArticle(articlesToGet, allArticles, newestArticles);
+
+                break;
+
+            case "de":
+                for (int i = 0; i < articlesToGet; i++) {
+                    NewestArticlesResponse newestArticlesResponse = new NewestArticlesResponse();
+                    newestArticlesResponse.setTitle(allArticles.get(i).getDeTitle());
+                    newestArticlesResponse.setText(allArticles.get(i).getDeText());
+
+                    newestArticles.add(newestArticlesResponse);
+                }
+
+                break;
+
+            default:
+                addEnglishArticle(articlesToGet, allArticles, newestArticles);
+        }
+
+        return newestArticles;
+    }
+
+    private void addEnglishArticle(int articlesToGet, ArrayList<Article> allArticles, ArrayList<NewestArticlesResponse> newestArticles) {
+        for (int i = 0; i < articlesToGet; i++) {
+            NewestArticlesResponse newestArticlesResponse = new NewestArticlesResponse();
+            newestArticlesResponse.setTitle(allArticles.get(i).getEnTitle());
+            newestArticlesResponse.setText(allArticles.get(i).getEnText());
+
+            newestArticles.add(newestArticlesResponse);
+        }
     }
 }
