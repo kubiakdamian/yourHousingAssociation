@@ -10,6 +10,7 @@ import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.model.Fee;
 import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
+import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.repository.FeeRepository;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.FeeService;
@@ -57,7 +58,7 @@ public class FeeServiceImpl implements FeeService {
         Date date = new Date();
         fee.setPassingDate(dateFormat.format(date));
 
-        fee.setPaidMonth(getActualMonth() - 1);
+        fee.setPaidMonth(getActualMonth() + 1);
 
         feeRepository.save(fee);
     }
@@ -70,6 +71,18 @@ public class FeeServiceImpl implements FeeService {
     }
 
     @Override
+    public FeeStatusResponse getFeeStatus(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+        Fee fee = feeRepository.findByUserId(user.getId()).orElseThrow(FeeNotFoundException::new);
+
+        FeeStatusResponse feeStatusResponse = new FeeStatusResponse();
+        feeStatusResponse.setPaid(fee.isPaid());
+        feeStatusResponse.setVerified(fee.isVerified());
+
+        return feeStatusResponse;
+    }
+
+    @Override
     @Transactional
     public ArrayList<Fee> getNotAcceptedManagedFees(String username) {
         List<Fee> fees = feeRepository.findAll();
@@ -79,7 +92,7 @@ public class FeeServiceImpl implements FeeService {
             throw new PermissionDeniedException();
         }
 
-        fees = fees.stream().filter(f -> f.getPaidMonth() == getActualMonth() - 1 &&
+        fees = fees.stream().filter(f -> f.getPaidMonth() == getActualMonth() + 1 &&
                 manager.getBlocksNumbers().contains(f.getUser().getAddress().getBlockNumber()) && !f.isVerified()).collect(Collectors.toList());
 
         return (ArrayList<Fee>) fees;

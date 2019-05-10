@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.qbsapps.yourHousingAssociation.model.Fee;
+import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.service.FeeService;
 
 import java.security.Principal;
@@ -50,16 +51,23 @@ public class FeeController {
     }
 
     @PostMapping("/accept/{feeId}")
-    public ResponseEntity acceptManagedFee(Principal user, @PathVariable  Long feeId) {
+    public ResponseEntity acceptManagedFee(Principal user, @PathVariable Long feeId) {
         feeService.acceptManagedFee(user.getName(), feeId);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("/decline/{feeId}")
-    public ResponseEntity declineManagedFee(Principal user, @PathVariable  Long feeId) {
+    public ResponseEntity declineManagedFee(Principal user, @PathVariable Long feeId) {
         feeService.declineManagedFee(user.getName(), feeId);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<?> getFeeStatus(Principal user) {
+        FeeStatusResponse feeStatusResponse = feeService.getFeeStatus(user.getName());
+
+        return ResponseEntity.ok(feeStatusResponse);
     }
 }

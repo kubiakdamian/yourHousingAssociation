@@ -110,15 +110,14 @@ public class ArticleServiceImpl implements ArticleService {
                     NewestArticlesResponse newestArticlesResponse = new NewestArticlesResponse();
                     newestArticlesResponse.setTitle(allArticles.get(i).getPlTitle());
                     newestArticlesResponse.setText(allArticles.get(i).getPlText());
+                    newestArticlesResponse.setImageUrl(allArticles.get(i).getImageUrl());
 
                     newestArticles.add(newestArticlesResponse);
                 }
-
                 break;
 
             case "en":
                 addEnglishArticle(articlesToGet, allArticles, newestArticles);
-
                 break;
 
             case "de":
@@ -126,10 +125,10 @@ public class ArticleServiceImpl implements ArticleService {
                     NewestArticlesResponse newestArticlesResponse = new NewestArticlesResponse();
                     newestArticlesResponse.setTitle(allArticles.get(i).getDeTitle());
                     newestArticlesResponse.setText(allArticles.get(i).getDeText());
+                    newestArticlesResponse.setImageUrl(allArticles.get(i).getImageUrl());
 
                     newestArticles.add(newestArticlesResponse);
                 }
-
                 break;
 
             default:
@@ -144,6 +143,7 @@ public class ArticleServiceImpl implements ArticleService {
             NewestArticlesResponse newestArticlesResponse = new NewestArticlesResponse();
             newestArticlesResponse.setTitle(allArticles.get(i).getEnTitle());
             newestArticlesResponse.setText(allArticles.get(i).getEnText());
+            newestArticlesResponse.setImageUrl(allArticles.get(i).getImageUrl());
 
             newestArticles.add(newestArticlesResponse);
         }

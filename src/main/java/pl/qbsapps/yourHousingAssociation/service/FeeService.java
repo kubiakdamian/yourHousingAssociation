@@ -1,6 +1,7 @@
 package pl.qbsapps.yourHousingAssociation.service;
 
 import pl.qbsapps.yourHousingAssociation.model.Fee;
+import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 
 import java.util.ArrayList;
 
@@ -14,4 +15,6 @@ public interface FeeService {
     void acceptManagedFee(String username, Long feeId);
 
     void declineManagedFee(String username, Long feeId);
+
+    FeeStatusResponse getFeeStatus(String username);
 }
