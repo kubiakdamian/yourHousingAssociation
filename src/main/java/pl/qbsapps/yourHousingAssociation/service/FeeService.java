@@ -1,6 +1,7 @@
 package pl.qbsapps.yourHousingAssociation.service;
 
 import pl.qbsapps.yourHousingAssociation.model.Fee;
+import pl.qbsapps.yourHousingAssociation.model.request.PaymentRequest;
 import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 
 import java.io.ByteArrayInputStream;
@@ -20,7 +21,7 @@ public interface FeeService {
 
     FeeStatusResponse getFeeStatus(String username);
 
-    void payFee(String username);
+    void payFee(String username, PaymentRequest paymentRequest);
 
     ByteArrayInputStream generatePDF(String username);
 }

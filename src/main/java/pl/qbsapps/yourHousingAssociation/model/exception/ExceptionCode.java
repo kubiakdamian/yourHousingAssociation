@@ -17,7 +17,8 @@ public enum ExceptionCode {
     MANAGERS_NOT_FOUND("MNF"),
     NO_REQUIRED_PERMISSIONS("NRP"),
     FEE_NOT_FOUND("FNF"),
-    FEE_ALREADY_PAID("FAP");
+    FEE_ALREADY_PAID("FAP"),
+    INVALID_CARD_NUMBER("ICN");
 
     private String code;
 }

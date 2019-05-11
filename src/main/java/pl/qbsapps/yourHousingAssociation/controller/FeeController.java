@@ -1,6 +1,5 @@
 package pl.qbsapps.yourHousingAssociation.controller;
 
-import com.itextpdf.text.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -11,14 +10,16 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.qbsapps.yourHousingAssociation.model.Fee;
+import pl.qbsapps.yourHousingAssociation.model.request.PaymentRequest;
 import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.service.FeeService;
 
+import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
-import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -77,14 +78,14 @@ public class FeeController {
     }
 
     @PostMapping("/pay")
-    public ResponseEntity payFee(Principal user) {
-        feeService.payFee(user.getName());
+    public ResponseEntity payFee(Principal user, @RequestBody @Valid PaymentRequest paymentRequest) {
+        feeService.payFee(user.getName(), paymentRequest);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping(value = "/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> generatePdf(Principal user){
+    public ResponseEntity<InputStreamResource> generatePdf(Principal user) {
         ByteArrayInputStream document = feeService.generatePDF(user.getName());
 
         HttpHeaders headers = new HttpHeaders();

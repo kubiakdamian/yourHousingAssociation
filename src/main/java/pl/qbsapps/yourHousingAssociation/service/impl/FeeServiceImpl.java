@@ -13,11 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.qbsapps.yourHousingAssociation.exception.FeeAlreadyAddedException;
 import pl.qbsapps.yourHousingAssociation.exception.FeeAlreadyPaidException;
 import pl.qbsapps.yourHousingAssociation.exception.FeeNotFoundException;
+import pl.qbsapps.yourHousingAssociation.exception.InvalidCardNumberException;
 import pl.qbsapps.yourHousingAssociation.exception.PermissionDeniedException;
 import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.model.Fee;
 import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
+import pl.qbsapps.yourHousingAssociation.model.request.PaymentRequest;
 import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.repository.FeeRepository;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
@@ -104,7 +106,12 @@ public class FeeServiceImpl implements FeeService {
 
     @Override
     @Transactional
-    public void payFee(String username) {
+    public void payFee(String username, PaymentRequest paymentRequest) {
+
+        if(!checkCardNumberCorrectness(paymentRequest.getCardNumber())){
+            throw new InvalidCardNumberException();
+        }
+
         Fee fee = findNewestFee(username);
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
@@ -272,5 +279,26 @@ public class FeeServiceImpl implements FeeService {
         Collections.reverse(allUserFees);
 
         return allUserFees.get(0);
+    }
+
+    private static boolean checkCardNumberCorrectness(String ccNumber)
+    {
+        int sum = 0;
+        boolean alternate = false;
+        for (int i = ccNumber.length() - 1; i >= 0; i--)
+        {
+            int n = Integer.parseInt(ccNumber.substring(i, i + 1));
+            if (alternate)
+            {
+                n *= 2;
+                if (n > 9)
+                {
+                    n = (n % 10) + 1;
+                }
+            }
+            sum += n;
+            alternate = !alternate;
+        }
+        return (sum % 10 == 0);
     }
 }
