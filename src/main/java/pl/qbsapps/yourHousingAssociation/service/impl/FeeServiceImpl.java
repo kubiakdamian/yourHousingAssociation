@@ -100,6 +100,7 @@ public class FeeServiceImpl implements FeeService {
         FeeStatusResponse feeStatusResponse = new FeeStatusResponse();
         feeStatusResponse.setPaid(fee.isPaid());
         feeStatusResponse.setVerified(fee.isVerified());
+        feeStatusResponse.setAmount(fee.getAmountToPay());
 
         return feeStatusResponse;
     }
