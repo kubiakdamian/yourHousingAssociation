@@ -28,14 +28,14 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public void addUserAddress(String username, String city, int blockNumber, String street, int streetNumber, int apartmentNumber, String postalCode) {
+    public void addUserAddress(String username, String city, int blockNumber, String street, int streetNumber, int apartmentNumber, String postalCode, double apartmentSize) {
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
         if (checkIfAddressIsAlreadyAdded(user.getId())) {
             throw new AddressAlreadyAddedException();
         }
 
-        Address address = new Address(city, blockNumber, street, streetNumber, apartmentNumber, postalCode, user);
+        Address address = new Address(city, blockNumber, street, streetNumber, apartmentNumber, postalCode, apartmentSize, user);
 
         verificationKeyService.generateKey(user);
         addressRepository.save(address);

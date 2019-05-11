@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -25,22 +26,34 @@ public class Fee {
     private String passingDate;
 
     @Column(nullable = false)
-    private float gas;
+    private BigDecimal gas;
 
     @Column(nullable = false)
-    private float coldWater;
+    private double gasUsage;
 
     @Column(nullable = false)
-    private float hotWater;
+    private BigDecimal coldWater;
 
     @Column(nullable = false)
-    private float sewage;
+    private double coldWaterUsage;
 
     @Column(nullable = false)
-    private float heating;
+    private BigDecimal hotWater;
 
     @Column(nullable = false)
-    private int repairFund;
+    private double hotWaterUsage;
+
+    @Column(nullable = false)
+    private BigDecimal sewage;
+
+    @Column(nullable = false)
+    private double sewageUsage;
+
+    @Column(nullable = false)
+    private BigDecimal heating;
+
+    @Column(nullable = false)
+    private BigDecimal repairFund;
 
     @Column(nullable = false)
     private boolean isPaid;
@@ -50,6 +63,9 @@ public class Fee {
 
     @Column(nullable = false)
     private int paidMonth;
+
+    @Column(nullable = false)
+    private BigDecimal amountToPay;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)

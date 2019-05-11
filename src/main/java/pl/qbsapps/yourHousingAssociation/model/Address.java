@@ -39,17 +39,21 @@ public class Address {
     @Size(min = 6, max = 6)
     private String postalCode;
 
+    @Column
+    private double apartmentSize;
+
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private User user;
 
-    public Address(String city, int blockNumber, String street, int streetNumber, int apartmentNumber, String postalCode, User user) {
+    public Address(String city, int blockNumber, String street, int streetNumber, int apartmentNumber, String postalCode, double apartmentSize, User user) {
         this.city = city;
         this.blockNumber = blockNumber;
         this.street = street;
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
         this.postalCode = postalCode;
+        this.apartmentSize = apartmentSize;
         this.user = user;
     }
 }

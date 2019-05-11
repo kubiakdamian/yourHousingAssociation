@@ -1,9 +1,17 @@
 package pl.qbsapps.yourHousingAssociation.service.impl;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.qbsapps.yourHousingAssociation.exception.FeeAlreadyAddedException;
+import pl.qbsapps.yourHousingAssociation.exception.FeeAlreadyPaidException;
 import pl.qbsapps.yourHousingAssociation.exception.FeeNotFoundException;
 import pl.qbsapps.yourHousingAssociation.exception.PermissionDeniedException;
 import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
@@ -14,14 +22,20 @@ import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.repository.FeeRepository;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.FeeService;
+import pl.qbsapps.yourHousingAssociation.utils.Prices;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class FeeServiceImpl implements FeeService {
@@ -37,8 +51,9 @@ public class FeeServiceImpl implements FeeService {
 
     @Override
     @Transactional
-    public void addFees(String userName, float gas, float coldWater, float hotWater, float sewage, float heating, int repairFund) {
+    public void addFees(String userName, double gas, double coldWater, double hotWater, double sewage) {
         User user = userRepository.findByEmail(userName).orElseThrow(UserNotFoundException::new);
+        double apartmentSize = user.getAddress().getApartmentSize();
 
         if (checkIfFeeIsAlreadyAdded(user.getId())) {
             throw new FeeAlreadyAddedException();
@@ -46,12 +61,18 @@ public class FeeServiceImpl implements FeeService {
 
         Fee fee = new Fee();
 
-        fee.setGas(gas);
-        fee.setColdWater(coldWater);
-        fee.setHotWater(hotWater);
-        fee.setSewage(sewage);
-        fee.setHeating(heating);
-        fee.setRepairFund(repairFund);
+        fee.setHotWaterUsage(hotWater);
+        fee.setColdWaterUsage(coldWater);
+        fee.setGasUsage(gas);
+        fee.setSewageUsage(sewage);
+
+        fee.setGas(Prices.GAS.getPrice().multiply(BigDecimal.valueOf(gas)));
+        fee.setColdWater(Prices.COLD_WATER.getPrice().multiply(BigDecimal.valueOf(coldWater)));
+        fee.setHotWater(Prices.HOT_WATER.getPrice().multiply(BigDecimal.valueOf(hotWater)));
+        fee.setSewage(Prices.SEWAGE.getPrice().multiply(BigDecimal.valueOf(sewage)));
+        fee.setHeating(Prices.HEATING.getPrice().multiply(BigDecimal.valueOf(apartmentSize)));
+        fee.setRepairFund(Prices.REPAIR_FUND.getPrice().multiply(BigDecimal.valueOf(apartmentSize)));
+        fee.setAmountToPay(fee.getColdWater().add(fee.getHotWater()).add(fee.getSewage()).add(fee.getGas()).add(fee.getHeating()).add(fee.getRepairFund()));
         fee.setUser(user);
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -72,14 +93,30 @@ public class FeeServiceImpl implements FeeService {
 
     @Override
     public FeeStatusResponse getFeeStatus(String username) {
-        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
-        Fee fee = feeRepository.findByUserId(user.getId()).orElseThrow(FeeNotFoundException::new);
+        Fee fee = findNewestFee(username);
 
         FeeStatusResponse feeStatusResponse = new FeeStatusResponse();
         feeStatusResponse.setPaid(fee.isPaid());
         feeStatusResponse.setVerified(fee.isVerified());
 
         return feeStatusResponse;
+    }
+
+    @Override
+    @Transactional
+    public void payFee(String username) {
+        Fee fee = findNewestFee(username);
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+        if (!user.getRole().equals(Role.TENANT)) {
+            throw new PermissionDeniedException();
+        }
+
+        if (fee.isPaid()) {
+            throw new FeeAlreadyPaidException();
+        }
+
+        fee.setPaid(true);
     }
 
     @Override
@@ -126,6 +163,87 @@ public class FeeServiceImpl implements FeeService {
         feeRepository.delete(fee);
     }
 
+    @Override
+    public ByteArrayInputStream generatePDF(String username) {
+        Document document = new Document();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        PdfPTable table = new PdfPTable(5);
+        addTableHeader(table);
+        addRows(table, username);
+
+        try {
+            PdfWriter.getInstance(document, out);
+            document.open();
+            document.add(table);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        document.close();
+
+        return new ByteArrayInputStream(out.toByteArray());
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Stream.of("Nazwa stawki", "J.M", "Ilosc", "Cena (pln)", "Razem (pln)")
+                .forEach(columnTitle -> {
+                    PdfPCell header = new PdfPCell();
+                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                    header.setBorderWidth(2);
+                    header.setPhrase(new Phrase(columnTitle));
+                    table.addCell(header);
+                });
+    }
+
+    private void addRows(PdfPTable table, String username) {
+        Fee fee = findNewestFee(username);
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+        double userApartmentSize = user.getAddress().getApartmentSize();
+
+        table.addCell("Ciepla woda");
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getHotWaterUsage()));
+        table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice()));
+        table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getHotWaterUsage()))));
+
+        table.addCell("Zimna woda");
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getColdWaterUsage()));
+        table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice()));
+        table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getColdWaterUsage()))));
+
+        table.addCell("Gaz");
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getGasUsage()));
+        table.addCell(String.format("%.2f", Prices.GAS.getPrice()));
+        table.addCell(String.format("%.2f", Prices.GAS.getPrice().multiply(BigDecimal.valueOf(fee.getGasUsage()))));
+
+        table.addCell("Scieki");
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getSewageUsage()));
+        table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice()));
+        table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice().multiply(BigDecimal.valueOf(fee.getSewageUsage()))));
+
+        table.addCell("Ogrzewanie");
+        table.addCell("m2");
+        table.addCell(String.valueOf(userApartmentSize));
+        table.addCell(String.format("%.2f", Prices.HEATING.getPrice()));
+        table.addCell(String.format("%.2f", Prices.HEATING.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
+
+        table.addCell("Fundusz rem.");
+        table.addCell("m2");
+        table.addCell(String.valueOf(userApartmentSize));
+        table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice()));
+        table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
+
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell(String.format("%.2f", fee.getAmountToPay()));
+    }
+
     private boolean checkIfFeeIsAlreadyAdded(Long userId) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -145,5 +263,14 @@ public class FeeServiceImpl implements FeeService {
         calendar.setTime(date);
 
         return Calendar.MONTH + 1;
+    }
+
+    private Fee findNewestFee(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+        ArrayList<Fee> allUserFees = (ArrayList<Fee>) feeRepository.findAllByUserId(user.getId());
+
+        Collections.reverse(allUserFees);
+
+        return allUserFees.get(0);
     }
 }

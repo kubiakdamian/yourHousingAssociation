@@ -54,11 +54,12 @@ public class UserController {
         return ResponseEntity.ok(new AuthenticationResponse(token, user.getRole(), user.isVerified()));
     }
 
-    @PostMapping(value = "/address/{city}/{blockNumber}/{street}/{streetNumber}/{apartmentNumber}/{postalCode}")
+    @PostMapping(value = "/address/{city}/{blockNumber}/{street}/{streetNumber}/{apartmentNumber}/{postalCode}/{apartmentSize}")
     public ResponseEntity addAddress(Principal user, @PathVariable String city, @PathVariable int blockNumber,
                                      @PathVariable String street, @PathVariable int streetNumber,
-                                     @PathVariable int apartmentNumber, @PathVariable String postalCode) {
-        addressService.addUserAddress(user.getName(), city, blockNumber, street, streetNumber, apartmentNumber, postalCode);
+                                     @PathVariable int apartmentNumber, @PathVariable String postalCode,
+                                     @PathVariable double apartmentSize) {
+        addressService.addUserAddress(user.getName(), city, blockNumber, street, streetNumber, apartmentNumber, postalCode, apartmentSize);
 
         return new ResponseEntity(HttpStatus.OK);
     }
