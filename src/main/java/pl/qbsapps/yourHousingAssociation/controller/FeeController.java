@@ -84,9 +84,9 @@ public class FeeController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> generatePdf(Principal user) {
-        ByteArrayInputStream document = feeService.generatePDF(user.getName());
+    @GetMapping(value = "/pdf/{lang}", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> generatePdf(Principal user, @PathVariable String lang) {
+        ByteArrayInputStream document = feeService.generatePDF(user.getName(), lang);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=fee.pdf");

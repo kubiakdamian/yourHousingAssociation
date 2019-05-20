@@ -24,6 +24,8 @@ import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.repository.FeeRepository;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.FeeService;
+import pl.qbsapps.yourHousingAssociation.utils.PdfTranslations;
+import pl.qbsapps.yourHousingAssociation.utils.PdfTranslationsHeaders;
 import pl.qbsapps.yourHousingAssociation.utils.Prices;
 
 import java.io.ByteArrayInputStream;
@@ -109,7 +111,7 @@ public class FeeServiceImpl implements FeeService {
     @Transactional
     public void payFee(String username, PaymentRequest paymentRequest) {
 
-        if(!checkCardNumberCorrectness(paymentRequest.getCardNumber())){
+        if (!checkCardNumberCorrectness(paymentRequest.getCardNumber())) {
             throw new InvalidCardNumberException();
         }
 
@@ -172,13 +174,13 @@ public class FeeServiceImpl implements FeeService {
     }
 
     @Override
-    public ByteArrayInputStream generatePDF(String username) {
+    public ByteArrayInputStream generatePDF(String username, String lang) {
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         PdfPTable table = new PdfPTable(5);
-        addTableHeader(table);
-        addRows(table, username);
+        addTableHeader(table, lang);
+        addRows(table, username, lang);
 
         try {
             PdfWriter.getInstance(document, out);
@@ -193,8 +195,28 @@ public class FeeServiceImpl implements FeeService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
-    private void addTableHeader(PdfPTable table) {
-        Stream.of("Nazwa stawki", "J.M", "Ilosc", "Cena (pln)", "Razem (pln)")
+    private void addTableHeader(PdfPTable table, String lang) {
+        PdfTranslationsHeaders headers;
+
+        switch (lang) {
+            case "pl":
+                headers = PdfTranslationsHeaders.PL;
+                break;
+
+            case "en":
+                headers = PdfTranslationsHeaders.EN;
+                break;
+
+            case "de":
+                headers = PdfTranslationsHeaders.DE;
+                break;
+
+            default:
+                headers = PdfTranslationsHeaders.EN;
+                break;
+        }
+
+        Stream.of(headers.getBidName(), "J.M", headers.getQuantity(), headers.getPrice(), headers.getSum())
                 .forEach(columnTitle -> {
                     PdfPCell header = new PdfPCell();
                     header.setBackgroundColor(BaseColor.LIGHT_GRAY);
@@ -204,52 +226,28 @@ public class FeeServiceImpl implements FeeService {
                 });
     }
 
-    private void addRows(PdfPTable table, String username) {
+    private void addRows(PdfPTable table, String username, String lang) {
         Fee fee = findNewestFee(username);
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
         double userApartmentSize = user.getAddress().getApartmentSize();
 
-        table.addCell("Ciepla woda");
-        table.addCell("m3");
-        table.addCell(String.valueOf(fee.getHotWaterUsage()));
-        table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice()));
-        table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getHotWaterUsage()))));
+        switch (lang) {
+            case "pl":
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.PL);
+                break;
 
-        table.addCell("Zimna woda");
-        table.addCell("m3");
-        table.addCell(String.valueOf(fee.getColdWaterUsage()));
-        table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice()));
-        table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getColdWaterUsage()))));
+            case "en":
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.EN);
+                break;
 
-        table.addCell("Gaz");
-        table.addCell("m3");
-        table.addCell(String.valueOf(fee.getGasUsage()));
-        table.addCell(String.format("%.2f", Prices.GAS.getPrice()));
-        table.addCell(String.format("%.2f", Prices.GAS.getPrice().multiply(BigDecimal.valueOf(fee.getGasUsage()))));
+            case "de":
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.DE);
+                break;
 
-        table.addCell("Scieki");
-        table.addCell("m3");
-        table.addCell(String.valueOf(fee.getSewageUsage()));
-        table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice()));
-        table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice().multiply(BigDecimal.valueOf(fee.getSewageUsage()))));
-
-        table.addCell("Ogrzewanie");
-        table.addCell("m2");
-        table.addCell(String.valueOf(userApartmentSize));
-        table.addCell(String.format("%.2f", Prices.HEATING.getPrice()));
-        table.addCell(String.format("%.2f", Prices.HEATING.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
-
-        table.addCell("Fundusz rem.");
-        table.addCell("m2");
-        table.addCell(String.valueOf(userApartmentSize));
-        table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice()));
-        table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
-
-        table.addCell("");
-        table.addCell("");
-        table.addCell("");
-        table.addCell("");
-        table.addCell(String.format("%.2f", fee.getAmountToPay()));
+            default:
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.EN);
+                break;
+        }
     }
 
     private boolean checkIfFeeIsAlreadyAdded(Long userId) {
@@ -282,18 +280,14 @@ public class FeeServiceImpl implements FeeService {
         return allUserFees.get(0);
     }
 
-    private static boolean checkCardNumberCorrectness(String ccNumber)
-    {
+    private static boolean checkCardNumberCorrectness(String ccNumber) {
         int sum = 0;
         boolean alternate = false;
-        for (int i = ccNumber.length() - 1; i >= 0; i--)
-        {
+        for (int i = ccNumber.length() - 1; i >= 0; i--) {
             int n = Integer.parseInt(ccNumber.substring(i, i + 1));
-            if (alternate)
-            {
+            if (alternate) {
                 n *= 2;
-                if (n > 9)
-                {
+                if (n > 9) {
                     n = (n % 10) + 1;
                 }
             }
@@ -301,5 +295,50 @@ public class FeeServiceImpl implements FeeService {
             alternate = !alternate;
         }
         return (sum % 10 == 0);
+    }
+
+    private void fillPdfWithData(PdfPTable table, Fee fee, double userApartmentSize, PdfTranslations data) {
+        table.addCell(data.getHotWater());
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getHotWaterUsage()));
+        table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice()));
+        table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getHotWaterUsage()))));
+
+        table.addCell(data.getColdWater());
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getColdWaterUsage()));
+        table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice()));
+        table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getColdWaterUsage()))));
+
+        table.addCell(data.getGas());
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getGasUsage()));
+        table.addCell(String.format("%.2f", Prices.GAS.getPrice()));
+        table.addCell(String.format("%.2f", Prices.GAS.getPrice().multiply(BigDecimal.valueOf(fee.getGasUsage()))));
+
+        table.addCell(data.getSewage());
+        table.addCell("m3");
+        table.addCell(String.valueOf(fee.getSewageUsage()));
+        table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice()));
+        table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice().multiply(BigDecimal.valueOf(fee.getSewageUsage()))));
+
+        table.addCell(data.getHeating());
+        table.addCell("m2");
+        table.addCell(String.valueOf(userApartmentSize));
+        table.addCell(String.format("%.2f", Prices.HEATING.getPrice()));
+        table.addCell(String.format("%.2f", Prices.HEATING.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
+
+        table.addCell(data.getRepairFund());
+        table.addCell("m2");
+        table.addCell(String.valueOf(userApartmentSize));
+        table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice()));
+        table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
+
+
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell(String.format("%.2f", fee.getAmountToPay()));
     }
 }
