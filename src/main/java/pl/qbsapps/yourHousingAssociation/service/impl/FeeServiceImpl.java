@@ -3,7 +3,9 @@ package pl.qbsapps.yourHousingAssociation.service.impl;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -30,6 +32,7 @@ import pl.qbsapps.yourHousingAssociation.utils.Prices;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -177,10 +180,17 @@ public class FeeServiceImpl implements FeeService {
     public ByteArrayInputStream generatePDF(String username, String lang) {
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
+        BaseFont bf = null;
+
+        try {
+            bf = BaseFont.createFont("Roboto-Black.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
+        }
 
         PdfPTable table = new PdfPTable(5);
-        addTableHeader(table, lang);
-        addRows(table, username, lang);
+        addTableHeader(table, lang, bf);
+        addRows(table, username, lang, bf);
 
         try {
             PdfWriter.getInstance(document, out);
@@ -195,7 +205,7 @@ public class FeeServiceImpl implements FeeService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
-    private void addTableHeader(PdfPTable table, String lang) {
+    private void addTableHeader(PdfPTable table, String lang, BaseFont bf) {
         PdfTranslationsHeaders headers;
 
         switch (lang) {
@@ -221,31 +231,30 @@ public class FeeServiceImpl implements FeeService {
                     PdfPCell header = new PdfPCell();
                     header.setBackgroundColor(BaseColor.LIGHT_GRAY);
                     header.setBorderWidth(2);
-                    header.setPhrase(new Phrase(columnTitle));
-                    table.addCell(header);
+                    table.addCell(new PdfPCell(new Phrase(columnTitle, new Font(bf, 12))));
                 });
     }
 
-    private void addRows(PdfPTable table, String username, String lang) {
+    private void addRows(PdfPTable table, String username, String lang, BaseFont bf) {
         Fee fee = findNewestFee(username);
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
         double userApartmentSize = user.getAddress().getApartmentSize();
 
         switch (lang) {
             case "pl":
-                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.PL);
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.PL, bf);
                 break;
 
             case "en":
-                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.EN);
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.EN, bf);
                 break;
 
             case "de":
-                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.DE);
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.DE, bf);
                 break;
 
             default:
-                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.EN);
+                fillPdfWithData(table, fee, userApartmentSize, PdfTranslations.EN, bf);
                 break;
         }
     }
@@ -297,38 +306,38 @@ public class FeeServiceImpl implements FeeService {
         return (sum % 10 == 0);
     }
 
-    private void fillPdfWithData(PdfPTable table, Fee fee, double userApartmentSize, PdfTranslations data) {
-        table.addCell(data.getHotWater());
+    private void fillPdfWithData(PdfPTable table, Fee fee, double userApartmentSize, PdfTranslations data, BaseFont bf) {
+        table.addCell(new PdfPCell(new Phrase(data.getHotWater(), new Font(bf, 12))));
         table.addCell("m3");
         table.addCell(String.valueOf(fee.getHotWaterUsage()));
         table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice()));
         table.addCell(String.format("%.2f", Prices.HOT_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getHotWaterUsage()))));
 
-        table.addCell(data.getColdWater());
+        table.addCell(new PdfPCell(new Phrase(data.getColdWater(), new Font(bf, 12))));
         table.addCell("m3");
         table.addCell(String.valueOf(fee.getColdWaterUsage()));
         table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice()));
         table.addCell(String.format("%.2f", Prices.COLD_WATER.getPrice().multiply(BigDecimal.valueOf(fee.getColdWaterUsage()))));
 
-        table.addCell(data.getGas());
+        table.addCell(new PdfPCell(new Phrase(data.getGas(), new Font(bf, 12))));
         table.addCell("m3");
         table.addCell(String.valueOf(fee.getGasUsage()));
         table.addCell(String.format("%.2f", Prices.GAS.getPrice()));
         table.addCell(String.format("%.2f", Prices.GAS.getPrice().multiply(BigDecimal.valueOf(fee.getGasUsage()))));
 
-        table.addCell(data.getSewage());
+        table.addCell(new PdfPCell(new Phrase(data.getSewage(), new Font(bf, 12))));
         table.addCell("m3");
         table.addCell(String.valueOf(fee.getSewageUsage()));
         table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice()));
         table.addCell(String.format("%.2f", Prices.SEWAGE.getPrice().multiply(BigDecimal.valueOf(fee.getSewageUsage()))));
 
-        table.addCell(data.getHeating());
+        table.addCell(new PdfPCell(new Phrase(data.getHeating(), new Font(bf, 12))));
         table.addCell("m2");
         table.addCell(String.valueOf(userApartmentSize));
         table.addCell(String.format("%.2f", Prices.HEATING.getPrice()));
         table.addCell(String.format("%.2f", Prices.HEATING.getPrice().multiply(BigDecimal.valueOf(userApartmentSize))));
 
-        table.addCell(data.getRepairFund());
+        table.addCell(new PdfPCell(new Phrase(data.getRepairFund(), new Font(bf, 12))));
         table.addCell("m2");
         table.addCell(String.valueOf(userApartmentSize));
         table.addCell(String.format("%.2f", Prices.REPAIR_FUND.getPrice()));
