@@ -6,9 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5096df4d-feba-495a-bc62-c7a8524c70da" name="Default" comment="">
+    <list default="true" id="5096df4d-feba-495a-bc62-c7a8524c70da" name="Default" comment="Translations for PDF added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,20 +23,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FeeServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FeeServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="232" column="45" selection-start-line="232" selection-start-column="45" selection-end-line="232" selection-end-column="45" />
+            <state relative-caret-position="221">
+              <caret line="224" column="13" lean-forward="true" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FeeService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FeeService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
+            <state relative-caret-position="357">
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="37" selection-start-column="37" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -41,8 +62,8 @@
       <file leaf-file-name="FeeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+            <state relative-caret-position="370">
+              <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -109,10 +130,8 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/repository/ArticleRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/request/TenantRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/TenantResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/WebConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/RegistrationService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/RegistrationServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/RegistrationController.java" />
@@ -120,14 +139,12 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/exception/FeeNotFoundException.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/ArticleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/ArticleService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/SecurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/NewestArticlesResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/ArticleServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/repository/FeeRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/exception/FeeAlreadyPaidException.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/utils/Prices.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/AddressService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/Address.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/AddressServiceImpl.java" />
@@ -137,11 +154,15 @@
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/exception/ExceptionCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/exception/InvalidCardNumberException.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/response/FeeStatusResponse.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/utils/PdfTranslationsHeaders.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/utils/PdfTranslations.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/SecurityConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java" />
       </list>
     </option>
   </component>
@@ -192,8 +213,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -235,6 +256,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -244,7 +274,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="yourHousingAssociation" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="yourHousingAssociation" type="b2602c69:ProjectViewProjectNode" />
@@ -449,6 +489,8 @@
       <workItem from="1557771244355" duration="97000" />
       <workItem from="1558300501403" duration="565000" />
       <workItem from="1558345647289" duration="3827000" />
+      <workItem from="1558372736744" duration="340000" />
+      <workItem from="1558545333298" duration="2592000" />
     </task>
     <task id="LOCAL-00001" summary="Handler for default errors added">
       <created>1552670110596</created>
@@ -671,7 +713,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150041000" />
+    <option name="totallyTimeSpent" value="153451000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -685,6 +727,7 @@
       <window_info anchor="right" id="CDI" order="8" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="2" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="JSF" order="5" />
@@ -701,7 +744,7 @@
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.36928105" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.32897604" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32897604" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17910448" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18230277" />
       <window_info anchor="right" id="Bean Validation" order="10" />
       <window_info id="Web" order="6" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="9" />
@@ -750,7 +793,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <option name="time" value="23" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -819,20 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1526">
-          <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
@@ -858,13 +887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/SecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="46" column="31" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -900,14 +922,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="64" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-          <folding>
-            <element signature="e#314#315#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#441#442#0" expanded="true" />
-            <element signature="e#484#485#0" expanded="true" />
-            <element signature="e#483#484#0" expanded="true" />
-            <element signature="e#556#557#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -964,9 +978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -974,13 +985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
           <caret line="37" column="123" selection-start-line="37" selection-start-column="123" selection-end-line="37" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="61" column="137" selection-start-line="61" selection-start-column="137" selection-end-line="61" selection-end-column="137" />
         </state>
       </provider>
     </entry>
@@ -1037,12 +1041,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="77" selection-start-line="14" selection-start-column="77" selection-end-line="14" selection-end-column="77" />
-          <folding>
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#315#316#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#515#516#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,9 +1055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1067,23 +1062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
         </state>
       </provider>
     </entry>
@@ -1091,9 +1069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="59" lean-forward="true" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1101,16 +1076,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="85" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/config/SecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="46" column="32" lean-forward="true" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="99" column="5" lean-forward="true" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/controller/FeeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/FeeServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="232" column="45" selection-start-line="232" selection-start-column="45" selection-end-line="232" selection-end-column="45" />
+        <state relative-caret-position="221">
+          <caret line="224" column="13" lean-forward="true" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/qbsapps/yourHousingAssociation/service/FeeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
         </state>
       </provider>
     </entry>

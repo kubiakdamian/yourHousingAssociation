@@ -5,7 +5,6 @@ import pl.qbsapps.yourHousingAssociation.model.request.PaymentRequest;
 import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 
 import java.io.ByteArrayInputStream;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public interface FeeService {
@@ -24,4 +23,6 @@ public interface FeeService {
     void payFee(String username, PaymentRequest paymentRequest);
 
     ByteArrayInputStream generatePDF(String username, String lang);
+
+    void fillUnfilledFees();
 }

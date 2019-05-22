@@ -19,4 +19,6 @@ public interface UserService {
     void checkIfUserHasRequiredPermissions(String username, Role role);
 
     TenantResponse getTenantByUsername(String managerName, String tenantEmail);
+
+    ArrayList<User> getAllUsersWithUnfilledFee();
 }

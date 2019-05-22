@@ -15,6 +15,7 @@ import pl.qbsapps.yourHousingAssociation.model.response.TenantResponse;
 import pl.qbsapps.yourHousingAssociation.model.response.UserDataResponse;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.repository.VerificationKeyRepository;
+import pl.qbsapps.yourHousingAssociation.service.FeeService;
 import pl.qbsapps.yourHousingAssociation.service.UserService;
 
 import java.util.ArrayList;
@@ -24,11 +25,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final VerificationKeyRepository verificationKeyRepository;
+    private final FeeService feeService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, VerificationKeyRepository verificationKeyRepository) {
+    public UserServiceImpl(UserRepository userRepository, VerificationKeyRepository verificationKeyRepository, FeeService feeService) {
         this.userRepository = userRepository;
         this.verificationKeyRepository = verificationKeyRepository;
+        this.feeService = feeService;
     }
 
     @Override
@@ -98,6 +101,19 @@ public class UserServiceImpl implements UserService {
         }
 
         return new TenantResponse(tenant.getEmail(), tenant.getFirstName(), tenant.getLastName(), tenant.getVerificationKey().getKey());
+    }
+
+    @Override
+    public ArrayList<User> getAllUsersWithUnfilledFee() {
+        ArrayList<User> users = (ArrayList<User>) userRepository.findAllByRole(Role.TENANT);
+        ArrayList<User> usersWithUnfilledFee = new ArrayList<>();
+
+        for (User user : users) {
+            System.out.println(feeService.isFeeFulfilled(user.getEmail()));
+            usersWithUnfilledFee.add(user);
+        }
+
+        return usersWithUnfilledFee;
     }
 
     public void checkIfUserHasRequiredPermissions(String username, Role role) {
