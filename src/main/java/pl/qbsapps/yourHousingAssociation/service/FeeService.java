@@ -23,6 +23,4 @@ public interface FeeService {
     void payFee(String username, PaymentRequest paymentRequest);
 
     ByteArrayInputStream generatePDF(String username, String lang);
-
-    void fillUnfilledFees();
 }

@@ -10,9 +10,6 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.qbsapps.yourHousingAssociation.exception.FeeAlreadyAddedException;
@@ -29,7 +26,6 @@ import pl.qbsapps.yourHousingAssociation.model.response.FeeStatusResponse;
 import pl.qbsapps.yourHousingAssociation.repository.FeeRepository;
 import pl.qbsapps.yourHousingAssociation.repository.UserRepository;
 import pl.qbsapps.yourHousingAssociation.service.FeeService;
-import pl.qbsapps.yourHousingAssociation.service.UserService;
 import pl.qbsapps.yourHousingAssociation.utils.PdfTranslations;
 import pl.qbsapps.yourHousingAssociation.utils.PdfTranslationsHeaders;
 import pl.qbsapps.yourHousingAssociation.utils.Prices;
@@ -49,19 +45,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-@EnableScheduling
 public class FeeServiceImpl implements FeeService {
 
     private final FeeRepository feeRepository;
     private final UserRepository userRepository;
-    private final UserService userService;
 
     @Autowired
-    @Lazy
-    public FeeServiceImpl(FeeRepository feeRepository, UserRepository userRepository, UserService userService) {
+    public FeeServiceImpl(FeeRepository feeRepository, UserRepository userRepository) {
         this.feeRepository = feeRepository;
         this.userRepository = userRepository;
-        this.userService = userService;
     }
 
     @Override
@@ -211,19 +203,6 @@ public class FeeServiceImpl implements FeeService {
         document.close();
 
         return new ByteArrayInputStream(out.toByteArray());
-    }
-
-    @Override
-    @Scheduled(cron = "0 10 10 28-31 * ?")
-    public void fillUnfilledFees() {
-        final Calendar c = Calendar.getInstance();
-        if (c.get(Calendar.DATE) == c.getActualMaximum(Calendar.DATE)) {
-            ArrayList<User> users = userService.getAllUsersWithUnfilledFee();
-
-            for (User user : users) {
-                addFees(user.getEmail(), 1, 2, 2, 4);
-            }
-        }
     }
 
     private void addTableHeader(PdfPTable table, String lang, BaseFont bf) {
