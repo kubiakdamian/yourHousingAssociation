@@ -38,6 +38,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -208,7 +209,10 @@ public class FeeServiceImpl implements FeeService {
     public ArrayList<Fee> getUserFeesHistory(String username) {
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
-        return (ArrayList<Fee>) feeRepository.findAllByUserId(user.getId());
+        ArrayList<Fee> fees = (ArrayList<Fee>) feeRepository.findAllByUserId(user.getId());
+        Collections.reverse(fees);
+        
+        return fees;
     }
 
     private void addTableHeader(PdfPTable table, String lang, BaseFont bf) {
@@ -289,6 +293,8 @@ public class FeeServiceImpl implements FeeService {
     private Fee findNewestFee(String username) {
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
         ArrayList<Fee> allUserFees = (ArrayList<Fee>) feeRepository.findAllByUserId(user.getId());
+
+        Collections.reverse(allUserFees);
 
         return allUserFees.get(0);
     }
