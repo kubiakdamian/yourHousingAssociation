@@ -15,7 +15,9 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class MailSenderServiceImpl implements MailSenderService {
 
-    private final static String SUBJECT = "yourHousingAssociation - Link aktywacyjny";
+    private final static String SUBJECT_PL = "yourHousingAssociation - Link aktywacyjny";
+    private final static String SUBJECT_EN = "yourHousingAssociation - Activation link";
+    private final static String SUBJECT_DE = "yourHousingAssociation - Aktivierungslink";
 
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
@@ -30,17 +32,37 @@ public class MailSenderServiceImpl implements MailSenderService {
     }
 
     @Override
-    public void sendEmail(String receiver, String content) {
+    public void sendEmail(String receiver, String content, String lang) {
         try {
             MimeMessage mail = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail, true);
             helper.setTo(receiver);
             helper.setFrom(mailSender);
-            helper.setSubject(SUBJECT);
+            setProperSubject(lang, helper);
             helper.setText(content, true);
             javaMailSender.send(mail);
         } catch (MessagingException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private void setProperSubject(String lang, MimeMessageHelper helper) throws MessagingException {
+        switch (lang) {
+            case "pl":
+                helper.setSubject(SUBJECT_PL);
+                break;
+
+            case "en":
+                helper.setSubject(SUBJECT_EN);
+                break;
+
+            case "de":
+                helper.setSubject(SUBJECT_DE);
+                break;
+
+            default:
+                helper.setSubject(SUBJECT_EN);
+                break;
         }
     }
 

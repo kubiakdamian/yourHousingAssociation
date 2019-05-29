@@ -40,8 +40,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     @Transactional
-    public void registerUser(RegistrationRequest registrationRequest) {
-        if(userRepository.findByEmail(registrationRequest.getEmail()).isPresent()){
+    public void registerUser(RegistrationRequest registrationRequest, String lang) {
+        if (userRepository.findByEmail(registrationRequest.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
 
@@ -59,13 +59,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         String token = generateTokenForUser(user);
 
-        String mailContent = mailSenderService.createEmailContent(
-                "Witaj " + user.getEmail().substring(0, user.getEmail().indexOf("@")) + "!",
-                "Dziękujemy za rejestrację w serwisie yourHousingAssociation. Poniżej znajduje się link aktywacyjny, kliknij go, aby dokończyć rejestrację",
-                "Kliknij w ten link, aby potwierdzić ades e-mail",
-                token);
+        String mailContent = generateProperMailContent(lang, user, token);
 
-        mailSenderService.sendEmail(registrationRequest.getEmail(), mailContent);
+        mailSenderService.sendEmail(registrationRequest.getEmail(), mailContent, lang);
     }
 
     @Override
@@ -84,16 +80,16 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void createManager(RegistrationRequest registrationRequest, String username, int lowBlock, int highBlock) {
         User admin = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
 
-        if(!admin.getRole().equals(Role.ADMIN)){
+        if (!admin.getRole().equals(Role.ADMIN)) {
             throw new PermissionDeniedException();
         }
 
-        if(userRepository.findByEmail(registrationRequest.getEmail()).isPresent()){
+        if (userRepository.findByEmail(registrationRequest.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
 
         ArrayList<Integer> blocks = new ArrayList<>();
-        for(int i = lowBlock; i <= highBlock; i++){
+        for (int i = lowBlock; i <= highBlock; i++) {
             blocks.add(i);
         }
 
@@ -121,5 +117,44 @@ public class RegistrationServiceImpl implements RegistrationService {
         activationTokenRepository.save(activationToken);
 
         return token;
+    }
+
+    private String generateProperMailContent(String lang, User user, String token) {
+        String mailContent;
+        switch (lang) {
+            case "pl":
+                mailContent = mailSenderService.createEmailContent(
+                        "Witaj " + user.getEmail().substring(0, user.getEmail().indexOf("@")) + "!",
+                        "Dziekujemy za rejestracje w serwisie yourHousingAssociation. Ponizej znajduje sie link aktywacyjny, kliknij go, aby dokonczyc rejestracje",
+                        "Kliknij w ten link, aby potwierdzic adres e-mail",
+                        token);
+                break;
+
+            case "en":
+                mailContent = mailSenderService.createEmailContent(
+                        "Hello " + user.getEmail().substring(0, user.getEmail().indexOf("@")) + "!",
+                        "Thank you for signing up in yourHousingAssociation. Below is an activation link, click it to complete your registration",
+                        "Click this link to confirm your email address",
+                        token);
+                break;
+
+            case "de":
+                mailContent = mailSenderService.createEmailContent(
+                        "Willkommen " + user.getEmail().substring(0, user.getEmail().indexOf("@")) + "!",
+                        "Vielen Dank, dass Sie sich bei Ihrer Wohnungsbaugesellschaft angemeldet haben. Unten finden Sie einen Aktivierungslink. Klicken Sie darauf, um Ihre Registrierung abzuschließen",
+                        "Klicken Sie auf diesen Link, um Ihre E-Mail-Adresse zu bestätigen",
+                        token);
+                break;
+
+            default:
+                mailContent = mailSenderService.createEmailContent(
+                        "Hello " + user.getEmail().substring(0, user.getEmail().indexOf("@")) + "!",
+                        "Thank you for signing up in yourHousingAssociation. Below is an activation link, click it to complete your registration",
+                        "Click this link to confirm your email address",
+                        token);
+                break;
+        }
+
+        return mailContent;
     }
 }

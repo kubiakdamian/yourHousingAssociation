@@ -30,11 +30,11 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
-    @PostMapping
-    public ResponseEntity registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) {
+    @PostMapping("/{lang}")
+    public ResponseEntity registerUser(@RequestBody @Valid RegistrationRequest registrationRequest, @PathVariable("lang") String lang) {
         logger.debug("Registrating user with email - " + registrationRequest.getEmail());
 
-        registrationService.registerUser(registrationRequest);
+        registrationService.registerUser(registrationRequest, lang);
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
