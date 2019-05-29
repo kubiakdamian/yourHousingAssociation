@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.qbsapps.yourHousingAssociation.model.request.RegistrationRequest;
 import pl.qbsapps.yourHousingAssociation.service.RegistrationService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
 
 @RestController
@@ -40,10 +42,10 @@ public class RegistrationController {
     }
 
     @GetMapping("/activate/{token}")
-    public ResponseEntity activateUser(final @PathVariable("token") String token) {
+    public void activateUser(final @PathVariable("token") String token, HttpServletResponse httpServletResponse) throws IOException {
         registrationService.activateUser(token);
 
-        return new ResponseEntity(HttpStatus.OK);
+        httpServletResponse.sendRedirect("http://localhost:3000");
     }
 
     @PostMapping("/manager")
