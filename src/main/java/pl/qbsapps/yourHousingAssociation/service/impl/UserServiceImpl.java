@@ -8,6 +8,7 @@ import pl.qbsapps.yourHousingAssociation.exception.PermissionDeniedException;
 import pl.qbsapps.yourHousingAssociation.exception.UserNotFoundException;
 import pl.qbsapps.yourHousingAssociation.exception.VerificationKeyNotFoundException;
 import pl.qbsapps.yourHousingAssociation.exception.WrongVerificationKeyException;
+import pl.qbsapps.yourHousingAssociation.model.Address;
 import pl.qbsapps.yourHousingAssociation.model.Role;
 import pl.qbsapps.yourHousingAssociation.model.User;
 import pl.qbsapps.yourHousingAssociation.model.VerificationKey;
@@ -100,7 +101,10 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException();
         }
 
-        return new TenantResponse(tenant.getEmail(), tenant.getFirstName(), tenant.getLastName(), tenant.getVerificationKey().getKey());
+        Address tenantAddress = tenant.getAddress();
+
+        return new TenantResponse(tenant.getEmail(), tenant.getFirstName(), tenant.getLastName(), tenant.getVerificationKey().getKey(),
+                tenantAddress.getCity(), tenantAddress.getStreet(), tenantAddress.getStreetNumber(), tenantAddress.getApartmentNumber(), tenantAddress.getBlockNumber(), tenantAddress.getApartmentSize());
     }
 
     @Override

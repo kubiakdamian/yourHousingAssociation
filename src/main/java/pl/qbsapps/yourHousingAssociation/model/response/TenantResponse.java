@@ -15,4 +15,16 @@ public class TenantResponse {
     private String lastName;
 
     private String key;
+
+    private String city;
+
+    private String street;
+
+    private int streetNumber;
+
+    private int apartmentNumber;
+
+    private int blockNumber;
+
+    private double apartmentSize;
 }
