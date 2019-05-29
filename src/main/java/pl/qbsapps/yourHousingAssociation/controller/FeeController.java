@@ -97,4 +97,11 @@ public class FeeController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(document));
     }
+
+    @GetMapping(value = "/history")
+    public ResponseEntity<ArrayList<Fee>> getUserFeeHistory(Principal user) {
+        ArrayList<Fee> fees = feeService.getUserFeesHistory(user.getName());
+
+        return ResponseEntity.ok(fees);
+    }
 }

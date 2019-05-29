@@ -38,7 +38,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -205,6 +204,13 @@ public class FeeServiceImpl implements FeeService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
+    @Override
+    public ArrayList<Fee> getUserFeesHistory(String username) {
+        User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
+
+        return (ArrayList<Fee>) feeRepository.findAllByUserId(user.getId());
+    }
+
     private void addTableHeader(PdfPTable table, String lang, BaseFont bf) {
         PdfTranslationsHeaders headers;
 
@@ -284,14 +290,17 @@ public class FeeServiceImpl implements FeeService {
         User user = userRepository.findByEmail(username).orElseThrow(UserNotFoundException::new);
         ArrayList<Fee> allUserFees = (ArrayList<Fee>) feeRepository.findAllByUserId(user.getId());
 
-        Collections.reverse(allUserFees);
-
         return allUserFees.get(0);
     }
 
     private static boolean checkCardNumberCorrectness(String ccNumber) {
         int sum = 0;
         boolean alternate = false;
+
+        if (ccNumber.length() < 16) {
+            return false;
+        }
+
         for (int i = ccNumber.length() - 1; i >= 0; i--) {
             int n = Integer.parseInt(ccNumber.substring(i, i + 1));
             if (alternate) {
